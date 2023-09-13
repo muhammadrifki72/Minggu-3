@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet Web Map</title>
+
+    <!-- leaflet css  -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    
+    <style>
+        /* ukuran peta */
+        #map {
+            width: 2000px;
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- peta akan ditampilkan dengan id = map -->
+    <div id="map"></div>
+
+    <!-- leaflet js  -->
+    <script>
+    var map = L.map('map').setView([-7.7639847, 110.3704093], 15);
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+        
+        // buat variabel berisi fugnsi L.popup 
+        var popup = L.popup();
+
+        // buat fungsi popup saat map diklik
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)   
+                .setContent("koordinatnya adalah " + e.latlng.toString()) //set isi konten yang ingin ditampilkan, kali ini kita akan menampilkan latitude dan longitude
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+        var marker = L.marker([-7.7639847, 110.3704093]).bindPopup('Teknik Geodesi UGM').addTo(map);
+        var marker = L.marker([-0.93853, 100.36406]).bindPopup('My Home').addTo(map);
+        var marker = L.marker([-7.76241, 110.38276]).bindPopup('Kost').addTo(map);
+ 
+    </script>
+ 
+</body>
+
+</html>
+  
